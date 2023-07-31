@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import CartContext from './store/Context'
+import { Collapse } from 'react-bootstrap';
 
-const Cart = () => {
+const Cart = ({ isCartOpen, handleCartToggle }) => {
    const cart =useContext(CartContext);
    let total =0;
    cart.items.forEach((item) => {total= total+Number(item.price)*Number(item.quantity)}
@@ -9,8 +10,9 @@ const Cart = () => {
    console.log(total);
 
    return (
-    <div>
+    < div className={`collapse collapse-horizontal${isCartOpen ? ' show' : ''}`}>
         <h1 style={{textAlign:'center'}}>CART</h1>
+         
         <div>
             <table className="table">
                 <thead>
@@ -42,7 +44,7 @@ const Cart = () => {
         <div className="d-flex justify-content-end">
             <button  className='btn btn-info'>PURCHASE</button>
         </div> 
-    </div>
+        </div> 
   )
 }
 
