@@ -11,7 +11,11 @@ const Header = () => {
   const[totalItem,setTotalItem] = useState(0);
   const cart =useContext(CartContext);
   useEffect(() => {
-    setTotalItem(cart.items.length);
+    let totalQuantity=0;
+    cart.items.forEach((item)=>{
+      totalQuantity+= Number(item.quantity);
+    })
+    setTotalItem(totalQuantity);
   }, [cart.items]);
 
   const handleCartToggle = () => {
