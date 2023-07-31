@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
 import About from './components/AboutPage';
-import Store from './components/StorePage';
+import Store from './components/Store';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import CartProvider from './components/store/CartProvider';
+import Home from './components/Home';
 function App() {
   return (
     <CartProvider>

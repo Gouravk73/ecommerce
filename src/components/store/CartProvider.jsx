@@ -6,9 +6,10 @@ const CartProvider = (props) => {
     const addItemToCartHandler=(item)=>{
       const existingItems=items.findIndex((cartItem)=> cartItem.title===item.title);
       if(existingItems!==-1){ 
-        const updatedItems=[...items];
-        updatedItems[existingItems].quantity= Number(updatedItems[existingItems].quantity)+1;
-        setItems(updatedItems)
+        return
+        // const updatedItems=[...items];
+        // updatedItems[existingItems].quantity= Number(updatedItems[existingItems].quantity)+1;
+        // setItems(updatedItems)
       }
       else setItems((prevItems) => [...prevItems,{ ...item, quantity: 1 }]);
     };

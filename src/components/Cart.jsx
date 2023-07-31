@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import CartContext from './store/Context'
-import { Collapse } from 'react-bootstrap';
 
 const Cart = ({ isCartOpen, handleCartToggle }) => {
    const cart =useContext(CartContext);

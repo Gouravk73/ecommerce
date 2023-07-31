@@ -1,39 +1,48 @@
-import React, { useContext } from 'react'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import ProductArray from'./ProductArray'
-import CartContext from './store/Context.jsx'
+import React from 'react'
+import { Button, Container } from 'react-bootstrap'
+
 const Home = () => {
-  const cart =useContext(CartContext);
-  const cartHandler=(item)=>{
-    cart.addItems(item);
-  }
   return (
-    <div  >
-        <Container fluid style={{backgroundColor:'grey',width:'100%'}}>
-        <h1 className="display-1 text-center">Home</h1>
-      </Container>
-      <h3 className="display-0 text-center">Music</h3>
-      <Container   >
-      <Row className='row-cols-lg-2 row--cols-md-1 gy-5 '    >
-     {
-        ProductArray.map((product, index) => (
-          <Col key={index}    >
-        <Card style={{   width: '20rem' }}>
-        <Card.Title style={{textAlign:'center'}}>{product.title}</Card.Title>
-
-      <Card.Img variant="top" src= {product.imageUrl} />
-      <Card.Body>
-        <Card.Text style={{display:'flex', justifyContent:'space-between'}}>
-           {product.price}
-        <Button variant="primary" onClick={()=>cartHandler(product)} >Add to cart</Button>
-
-        </Card.Text>
-      </Card.Body>
-    </Card> </Col>
-        ))
-     }
-     </Row>
-      </Container>
+    <div>
+      <div className="container-fluid bg-secondary text-center py-5  ">
+        <div className="row" >
+          <div style={{ margin: 0 }}><h1 className='text-light display-1'>The Generics</h1> </div>
+          <div style={{ margin: 0 }}><Button className='btn btn bg-transparent btn-outline-primary'>Get our Latest Album </Button>  </div>
+        </div>
+      </div>
+      <div className="container py-2 text-center ">
+        <table className="table">
+          <tbody>
+            <tr>
+              <th className='text-dark small'>JUL16</th>
+              <td className='text-secondary small'>DETROIT, MI</td>
+              <td className='text-secondary  small'>DTE ENERGY MUSIC THEATRE</td>
+              <td ><Button className='btn btn-info btn-sm'>BUY TICKETS</Button></td>
+            </tr>
+            <tr>
+              <th className='text-dark small'>JUL16</th>
+              <td className='text-secondary small'>DETROIT, MI</td>
+              <td className='text-secondary small'>DTE ENERGY MUSIC THEATRE</td>
+              <td ><Button className='btn btn-info btn-sm'>BUY TICKETS</Button></td>
+            </tr><tr>
+              <th className='text-dark small'>JUL16</th>
+              <td className='text-secondary small'>DETROIT, MI</td>
+              <td className='text-secondary small'>DTE ENERGY MUSIC THEATRE</td>
+              <td  ><Button className='btn btn-info btn-sm'>BUY TICKETS</Button></td>
+            </tr><tr>
+              <th className='text-dark small'>JUL16</th>
+              <td className='text-secondary small'>DETROIT, MI</td>
+              <td className='text-secondary small'>DTE ENERGY MUSIC THEATRE</td>
+              <td><Button className='btn btn-info btn-sm'>BUY TICKETS</Button></td>
+            </tr><tr>
+              <th className='text-dark small'>JUL16</th>
+              <td className='text-secondary small'>DETROIT, MI</td>
+              <td className='text-secondary small'>DTE ENERGY MUSIC THEATRE</td>
+              <td><Button className='btn btn-info btn-sm'>BUY TICKETS</Button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
