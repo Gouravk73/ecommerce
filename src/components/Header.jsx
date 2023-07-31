@@ -17,9 +17,11 @@ const Header = () => {
 
           </Nav>
           <Button variant="primary">
-      Profile <Badge bg="secondary">9</Badge>
-      <span className="visually-hidden"></span>
-    </Button>
+            <Nav.Link as={Link} to={'/cart'}>Profile
+              <Badge bg="secondary">9</Badge>
+              <span className="visually-hidden"></span>
+            </Nav.Link>
+        </Button>
         </Container>
       </Navbar> 
        
