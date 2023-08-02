@@ -1,14 +1,14 @@
 import React, { useState,useRef, useContext } from 'react'
 import { Button } from 'react-bootstrap';
-import{useNavigate } from 'react-router-dom'
-import LoginContext from'../components/store/LoginContext'
+import{ useNavigate } from 'react-router-dom'
+ import LoginContext from './store/LoginContext.jsx';
 const Login = () => {
-    const history = useNavigate ();
+    const navigate  = useNavigate ();
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const emailInputRef =useRef();
     const passwordInputRef =useRef();
-    const authCtx = useContext(LoginContext);
+    const authCtx =useContext(LoginContext);
 
 
 const submitHandler=(e)=>{
@@ -43,9 +43,10 @@ const submitHandler=(e)=>{
             throw new Error(data.error.message);
         })
     }).then((data)=>{
-         authCtx.login(data.idToken);
-         //console.log(data);
-        history('/store')
+        console.log('hey');
+        authCtx.login(data.idToken)
+         console.log(data,'data',data.idToken);
+         navigate('/store')
 
     }).catch((err)=>{
          alert(err.message);

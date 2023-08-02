@@ -7,30 +7,39 @@ import Footer from './components/Footer';
 import Cart from './components/Cart';
 import CartProvider from './components/store/CartProvider';
 import Home from './components/Home';
+import Login from './components/Login';
 import Contact from './components/Contact';
 import ProductDetails from './components/ProductDetails';
-import Login from './components/Login';
 import { LoginProvider } from './components/store/LoginContext';
- function App() {
-  return (
+import LoginContext from './components/store/LoginContext';
+import { useContext } from 'react';
+function App() {
+  const loginCtx = useContext(LoginContext);
+     console.log( 'app',loginCtx.token)
+
+   return (
+      <LoginProvider>
     <CartProvider>
-    <LoginProvider>
+
     <BrowserRouter>
     <Header/>
     <Routes>
     <Route  path={"/" }element={<Home/>} />
-    <Route  path={"/store" }element={<Store/>} />
-    <Route  path={"/about" }element={<About/>} />
+    {loginCtx.isLoggedIn&&<Route path='/store' 
+     element={<Store/>} />}
+     <Route  path={"/about" }element={<About/>} />
     <Route path={"/cart" } element={<Cart/>} />
     <Route path={"/contact" } element={<Contact />} />
+    <Route path={"/login" } element={<Login />} />
     <Route path={"/store/:producttitle" } element={<ProductDetails />} />
-    <Route path={'/login'} element={<Login />} />
-     
+    <Route path={'*'} element={<h1>Access Denied</h1>} />
+
     </Routes>
     <Footer/>
     </BrowserRouter>
-    </LoginProvider>
     </CartProvider>
+
+    </LoginProvider>
   );
 }
 

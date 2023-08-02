@@ -4,11 +4,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Cart from './Cart';
+import LoginContext from './store/LoginContext';
 import CartContext from './store/Context';
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const[totalItem,setTotalItem] = useState(0);
   const cart =useContext(CartContext);
+  const loginCntxt =useContext(LoginContext);
   useEffect(() => {
     let totalQuantity=0;
     cart.items.forEach((item)=>{
@@ -25,7 +27,7 @@ const Header = () => {
      <Navbar bg="black" data-bs-theme="dark">
         <div className='container   d-flex justify-content-between '> 
           <div className="col align-self-start">
-            <Nav className='navbar-nav'>
+            <Nav className="me-auto">
               <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
               <Nav.Link as={Link} to={'/store'}>Store</Nav.Link>
               <Nav.Link  as={Link} to={'/about'}>About</Nav.Link>
@@ -33,17 +35,18 @@ const Header = () => {
 
             </Nav>
           </div>
-          <div className='container d-flex justify-content-center'>
-          <Nav className='navbar-nav navbar-right'>
+          <nav className=' col col-p-2'>
             <Button variant="primary" onClick={handleCartToggle}>
               <Nav.Link >Profile
                 <Badge bg="secondary">{totalItem}</Badge>
                 <span className="visually-hidden"></span>
               </Nav.Link>
           </Button>
-          <Button><Nav.Link as={Link} to={'/login'} >Login</Nav.Link> </Button>
-           </Nav>
-          </div>
+          {!loginCntxt.isLoggedIn&&<Button>
+                <Nav.Link as={Link} to={'/login'} >Login</Nav.Link>
+              </Button>}
+           </nav>
+          
         </div>
       </Navbar>
       <Cart isCartOpen={isCartOpen} />

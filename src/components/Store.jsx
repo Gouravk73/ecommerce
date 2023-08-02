@@ -3,13 +3,16 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import ProductArray from'./ProductArray'
 import CartContext from './store/Context.jsx'
 import { Link } from 'react-router-dom';
-const Store = () => {
+  const Store = () => {
   const cart =useContext(CartContext);
-  const cartHandler=(item)=>{
+ 
+   const cartHandler=(item)=>{
     cart.addItems(item);
   }
+ 
   return (
-    <div  >
+    <div>
+    { <div  >
       <Container fluid style={{backgroundColor:'grey',width:'100%'}}>
         <h1 className="display-1 text-center">Home</h1>
       </Container>
@@ -37,6 +40,7 @@ const Store = () => {
      }
      </Row>
       </Container>
+    </div>}
     </div>
   )
 }

@@ -6,8 +6,7 @@ const Cart = ({ isCartOpen, handleCartToggle }) => {
    let total =0;
    cart.items.forEach((item) => {total= total+Number(item.price)*Number(item.quantity)}
    );
-   console.log(total);
-
+ 
    return (
     < div className={`collapse collapse-horizontal${isCartOpen ? ' show' : ''}`}>
         <h1 style={{textAlign:'center'}}>CART</h1>
