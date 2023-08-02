@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Badge, Button } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
@@ -24,21 +23,28 @@ const Header = () => {
   return (
     <>
      <Navbar bg="black" data-bs-theme="dark">
-        <Container> 
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
-            <Nav.Link as={Link} to={'/store'}>Store</Nav.Link>
-            <Nav.Link  as={Link} to={'/about'}>About</Nav.Link>
-            <Nav.Link  as={Link} to={'/contact'}>Contact</Nav.Link>
+        <div className='container   d-flex justify-content-between '> 
+          <div className="col align-self-start">
+            <Nav className='navbar-nav'>
+              <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
+              <Nav.Link as={Link} to={'/store'}>Store</Nav.Link>
+              <Nav.Link  as={Link} to={'/about'}>About</Nav.Link>
+              <Nav.Link  as={Link} to={'/contact'}>Contact</Nav.Link>
 
-          </Nav>
-          <Button variant="primary" onClick={handleCartToggle}>
-            <Nav.Link >Profile
-              <Badge bg="secondary">{totalItem}</Badge>
-              <span className="visually-hidden"></span>
-            </Nav.Link>
-        </Button>
-        </Container>
+            </Nav>
+          </div>
+          <div className='container d-flex justify-content-center'>
+          <Nav className='navbar-nav navbar-right'>
+            <Button variant="primary" onClick={handleCartToggle}>
+              <Nav.Link >Profile
+                <Badge bg="secondary">{totalItem}</Badge>
+                <span className="visually-hidden"></span>
+              </Nav.Link>
+          </Button>
+          <Button><Nav.Link as={Link} to={'/login'} >Login</Nav.Link> </Button>
+           </Nav>
+          </div>
+        </div>
       </Navbar>
       <Cart isCartOpen={isCartOpen} />
 

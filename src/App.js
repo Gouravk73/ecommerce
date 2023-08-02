@@ -8,9 +8,13 @@ import Cart from './components/Cart';
 import CartProvider from './components/store/CartProvider';
 import Home from './components/Home';
 import Contact from './components/Contact';
-function App() {
+import ProductDetails from './components/ProductDetails';
+import Login from './components/Login';
+import { LoginProvider } from './components/store/LoginContext';
+ function App() {
   return (
     <CartProvider>
+    <LoginProvider>
     <BrowserRouter>
     <Header/>
     <Routes>
@@ -19,10 +23,13 @@ function App() {
     <Route  path={"/about" }element={<About/>} />
     <Route path={"/cart" } element={<Cart/>} />
     <Route path={"/contact" } element={<Contact />} />
-
+    <Route path={"/store/:producttitle" } element={<ProductDetails />} />
+    <Route path={'/login'} element={<Login />} />
+     
     </Routes>
     <Footer/>
     </BrowserRouter>
+    </LoginProvider>
     </CartProvider>
   );
 }
