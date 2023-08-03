@@ -57,8 +57,10 @@ const submitHandler=(e)=>{
         })
     }
     }).then((data)=>{
-         authCtx.login(data.idToken)
-         console.log(data,'data',data.idToken);
+         authCtx.login(data.idToken,data.email) 
+
+         //console.log(data,'data',data.idToken);
+
          navigate('/store');
  
     }).catch((err)=>{

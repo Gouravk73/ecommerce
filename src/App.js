@@ -10,10 +10,12 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Contact from './components/Contact';
 import ProductDetails from './components/ProductDetails';
+import AddDataForm from './components/AdaaDataForm';
 
 function App() {
   const loginCtx = useContext(LoginContext);
-     console.log( 'token in app context',loginCtx.token)
+    //  console.log( 'token in app context',loginCtx.token)
+     console.log( 'token in app context',loginCtx.email)
 
    return (
     <CartProvider>
@@ -22,6 +24,7 @@ function App() {
     <Header/>
     <Routes>
     <Route  path={"/" }element={<Home/>} />
+    <Route path={'/form'} element={<AddDataForm/>} />
     {<Route path='/store' 
      element={loginCtx.isLoggedIn?<Store/>:<Login/>} />}
      <Route  path={"/about" }element={<About/>} />

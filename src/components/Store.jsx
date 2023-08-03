@@ -3,11 +3,36 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import ProductArray from'./ProductArray'
 import CartContext from './store/Context.jsx'
 import { Link } from 'react-router-dom';
+import LoginContext from './store/LoginContext';
   const Store = () => {
   const cart =useContext(CartContext);
- 
-   const cartHandler=(item)=>{
-    cart.addItems(item);
+  const loginCtx=useContext(LoginContext);
+
+  const addToApi=async(item)=>{
+    console.log(item)
+     try {
+      const response = await fetch(`https://crudcrud.com/api/00107a305d544825af9013e048a15784/${loginCtx.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add data.');
+      }
+
+      // Data added successfully, do something here if needed.
+    } catch (error) {
+      console.error(error.message);
+    }
+
+  }
+  const cartHandler=(item)=>{
+  cart.addItems(item);
+  console.log(cart.items)
+  addToApi(item);
   }
  
   return (
@@ -25,7 +50,7 @@ import { Link } from 'react-router-dom';
           <Card style={{   width: '20rem' }}>
             <Card.Title style={{textAlign:'center'}}>{product.title}</Card.Title>
             <Link to={`/store/${encodeURIComponent(product.title)}`}> 
-            {console.log(encodeURIComponent(product.title),'dssd')}
+            {/* {console.log(encodeURIComponent(product.title),'dssd')} */}
               <Card.Img variant="top" src= {product.imageUrl} />
             </Link>
             <Card.Body>

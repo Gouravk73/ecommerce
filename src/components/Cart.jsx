@@ -1,16 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CartContext from './store/Context'
+import LoginContext from './store/LoginContext';
 
 const Cart = ({ isCartOpen, handleCartToggle }) => {
    const cart =useContext(CartContext);
+    const loginCtx=useContext(LoginContext)
+
+   useEffect(() => {
+     fetchDataFromAPI();
+  }, []);
+
+  const fetchDataFromAPI = async () => {
+    try {
+      const response = await fetch(`https://crudcrud.com/api/00107a305d544825af9013e048a15784/${loginCtx.email}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data from API.');
+      }
+      const data = await response.json();
+       console.error(data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
    let total =0;
    cart.items.forEach((item) => {total= total+Number(item.price)*Number(item.quantity)}
    );
- 
+
    return (
     < div className={`collapse collapse-horizontal${isCartOpen ? ' show' : ''}`}>
         <h1 style={{textAlign:'center'}}>CART</h1>
-         
+
         <div>
             <table className="table">
                 <thead>
