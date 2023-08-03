@@ -22,6 +22,9 @@ const Header = () => {
   const handleCartToggle = () => {
     setIsCartOpen((prevValue) => !prevValue);
   };
+  const logoutHandler=()=>{
+    loginCntxt.logout();
+  }
   return (
     <>
      <Navbar bg="black" data-bs-theme="dark">
@@ -44,6 +47,9 @@ const Header = () => {
           </Button>
           {!loginCntxt.isLoggedIn&&<Button>
                 <Nav.Link as={Link} to={'/login'} >Login</Nav.Link>
+              </Button>}
+              {loginCntxt.isLoggedIn&&<Button onClick={logoutHandler}>
+                <Nav.Link as={Link} to={'/login'} >Logout</Nav.Link>
               </Button>}
            </nav>
           

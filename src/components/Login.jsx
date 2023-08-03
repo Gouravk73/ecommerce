@@ -1,14 +1,21 @@
 import React, { useState,useRef, useContext } from 'react'
 import { Button } from 'react-bootstrap';
-import{ useNavigate } from 'react-router-dom'
- import LoginContext from './store/LoginContext.jsx';
+  import LoginContext from './store/LoginContext.jsx';
+import {  useNavigate } from 'react-router-dom';
 const Login = () => {
-    const navigate  = useNavigate ();
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const emailInputRef =useRef();
     const passwordInputRef =useRef();
+
     const authCtx =useContext(LoginContext);
+    const navigate = useNavigate();
+
+    const [isLogin, setIsLogin] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const switchAuthModeHandler = () => {
+        setIsLogin((prevState) => !prevState);
+      };
 
 
 const submitHandler=(e)=>{
@@ -18,14 +25,14 @@ const submitHandler=(e)=>{
  
     setIsLoading(true);
 
-    let URL
+    let url;
     if(isLogin){
-        URL='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDZ02Lg8ai7KadcX0d0dwfR8J2RaxbpTkw'
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDZ02Lg8ai7KadcX0d0dwfR8J2RaxbpTkw'
     }
     else{
-        URL='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDZ02Lg8ai7KadcX0d0dwfR8J2RaxbpTkw'
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDZ02Lg8ai7KadcX0d0dwfR8J2RaxbpTkw'
     }
-    fetch(URL,{
+    fetch(url,{
         method: 'POST',
         body:JSON.stringify({email:enteredEmail,
         password:enteredPassword,
@@ -37,25 +44,29 @@ const submitHandler=(e)=>{
         },
     }).then((res)=>{
         setIsLoading(false);
-        if(res.ok) return res.json();
-        else return res.json().then((data)=>{
-            console.log(data.error.message);
-            throw new Error(data.error.message);
-        })
-    }).then((data)=>{
-        console.log('hey');
-        authCtx.login(data.idToken)
-         console.log(data,'data',data.idToken);
-         navigate('/store')
+        if(res.ok) {
+            return res.json();
+        }else {
+            return res.json().then((data)=>{
+            //let errorMessage = 'Authentication failed!';
 
+            //console.log(data.error.message);
+            throw new Error(data.error.message);
+           // throw new Error(errorMessage);
+
+        })
+    }
+    }).then((data)=>{
+         authCtx.login(data.idToken)
+         console.log(data,'data',data.idToken);
+         navigate('/store');
+ 
     }).catch((err)=>{
          alert(err.message);
     })
 
 }
-const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
-  };
+
 
 
   return (
@@ -64,11 +75,11 @@ const switchAuthModeHandler = () => {
         <form action="" onSubmit={submitHandler} >
             <div className="form-group px-5 m-2">
                 <label htmlFor="">Email</label>
-                <input className="form-control" type="email" ref={emailInputRef} />
+                <input className="form-control" type="email" ref={emailInputRef} required />
             </div>
             <div className="px-5 form-group m-2">
                 <label htmlFor="">Password</label>
-                <input className="form-control" type="password" ref={passwordInputRef}/>
+                <input className="form-control" type="password" ref={passwordInputRef} required/>
             </div>
             <div className="col px-5 m-2">
             {!isLoading && (<button type="submit" className="btn btn-primary">{isLogin ? 'Login' : 'Create Account'}</button>)}
@@ -77,11 +88,8 @@ const switchAuthModeHandler = () => {
             <div className="col px-5 m-2">
             <Button onClick={switchAuthModeHandler}>
                 {isLogin ? 'Create new account' : 'Login with existing account'}
-            </Button>S
-            </div>
-            <div className='text-center'>
- 
-            </div>
+            </Button>
+            </div> 
         </form>
     </div>
   )
